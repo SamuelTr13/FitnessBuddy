@@ -10,9 +10,9 @@ module.exports = {
         filename: 'bundle.js',
     },
 
-    mode: process.env.NODE_ENV,
+    mode: 'development',
 
-    modules: {
+    module: {
         rules: [{
                 test: /jsx?$/,
                 exclude: /node_modules/,
@@ -22,20 +22,18 @@ module.exports = {
                 },
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.s?css$/,
                 use: [
                     "style-loader",
                     "css-loader",
-                    {
-                        loader: "sass-loader",
-                    }
+                    "sass-loader",
                 ],
             }],
     },//end of modules
 
-    plugins: [
-        new HtmlWebpackPlugin({template: './index.html'})
-    ],
+    // plugins: [
+    //     new HtmlWebpackPlugin({template: './index.html'})
+    // ],//end of plugins
 
     devServer: {
         static: {
@@ -48,6 +46,9 @@ module.exports = {
                 router: () => 'http://localhost:3000',
             },
         }
-    }
+    },//end of dev server
 
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
 }
