@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import Menu from './Menu.js';
+import Chest from '../Pages/Chest.js';
 import {Route,BrowserRouter as Router, Routes, } from 'react-router-dom'
 import Home from '../components/Home.js';
+import Back from '../Pages/Back';
+import Legs from '../Pages/Legs';
+import Arms from '../Pages/Arms';
+import Shoulders from '../Pages/Shoulders';
 
 class App extends Component {
 
@@ -10,7 +14,11 @@ class App extends Component {
                 <div>
             <Router>
                     <Routes>
-                        <Route path='/chest' element= {<Menu/>}/>
+                        <Route path='/chest' element={<Chest />} />
+                        <Route path='/back' element={<Back />} />
+                        <Route path='/legs' element={<Legs />} />
+                        <Route path='/arms' element={<Arms />} />
+                        <Route path='/shoulders' element= {<Shoulders/>}/>
                         <Route path='/' element={<Home/>}/>
                     </Routes>
             </Router>

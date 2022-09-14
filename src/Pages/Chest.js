@@ -5,7 +5,7 @@ export default function Home() {
     return (
       <section className="mainMenu">
         <header className="pageHeader">
-          <h1>Chest Day!</h1>
+          <h1>Let's Get that Pec Meat</h1>
           <div id = 'mainContainer'>
             <div id ='exerciseBox'>
               <h3>Bench Press</h3>
