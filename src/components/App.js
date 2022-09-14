@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chest from '../Pages/Chest.js';
 import {Route,BrowserRouter as Router, Routes, } from 'react-router-dom'
-import Home from '../components/Home.js';
+import Home from '../Pages/Home';
 import Back from '../Pages/Back';
 import Legs from '../Pages/Legs';
 import Arms from '../Pages/Arms';

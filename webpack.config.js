@@ -1,5 +1,6 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
 
@@ -19,7 +20,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
@@ -34,6 +35,28 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             }
         ]
-    }
+    },
 
+    devServer: {
+        host: 'localhost',
+        port: 8080,
+        hot: true,
+        historyApiFallback: true,
+
+        static: {
+            directory: path.join(__dirname, 'build'),
+            publicPath: './build/bundle.js',
+        },
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        
+        proxy: {
+            '/pages/**': {
+                target: 'http://localhost:3000', 
+                secure: false,
+            },
+        }
+    },
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
 }

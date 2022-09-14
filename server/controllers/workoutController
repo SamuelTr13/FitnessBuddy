@@ -1,0 +1,33 @@
+const models = require('../models/workoutModels');
+
+const workoutController = {};
+
+//this controller gets all the workout history
+workoutController.getHistory = (req, res, next) => {
+    models.History.find({}, (err, history) => {
+        if (err) return next({
+            log: 'Middleware error. workoutController getHistory',
+            message: { err: 'An err occurred' },
+        });
+        console.log('HISTORY', history)
+        res.locals.history = history;
+        return next();
+    });
+};
+
+//this controller adds the input history to the database
+workoutController.addHistory = (req, res, next) => {
+    models.History.create({
+        reps: req.body.reps,
+        weight: req.body.weight,
+        notes: req.body.notes,
+    }, (err) => {
+        if (err) return next({
+            log: 'Middleware error. workoutController addHistory',
+            message: { err: 'An err occurred' },
+        });
+        return next();
+    });
+}//end of addhistory
+
+module.exports = workoutController;
