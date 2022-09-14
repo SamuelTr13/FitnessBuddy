@@ -1,25 +1,7 @@
 import React, { Component } from 'react';
 import '../styles.css';
 
-class Menu extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    // fetch('/api/')
-    //   .then(res => res.json())
-    //   .then((characters) => {
-    //     if (!Array.isArray(characters)) characters = [];
-    //     return this.setState({
-    //       characters,
-    //       fetchedChars: true
-    //     });
-    //   })
-    //   .catch(err => console.log('Characters.componentDidMount: get characters: ERROR: ', err));
-  }
-
-  render() {
+export default function Home() {
     return (
       <section className="mainMenu">
         <header className="pageHeader">
@@ -101,7 +83,5 @@ class Menu extends Component {
         </header>
       </section>
     );
-  }
 }
 
-export default Menu;
