@@ -1,54 +1,39 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './client/index.js', 
+
+    entry: './src/index.js',
 
     output: {
-        path: path.resolve(__dirname, 'build'), 
-        filename: 'bundle.js',
+        path: path.join(__dirname, '/dist'),
+        filename: 'bundle.js'
     },
 
-    mode: 'development',
+    plugins: [
+        new HTMLWebpackPlugin({
+            template: './src/index.html'
+        })
+    ],
 
     module: {
-        rules: [{
-                test: /jsx?$/,
+        rules: [
+            {
+                test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/env', '@babel/react'],
-                },
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                        }
+                }
             },
             {
-                test: /\.s?css$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader",
-                ],
-            }],
-    },//end of modules
+                test: /.(css|scss)$/,
+                exclude: /node_modules/,
+                use: ['style-loader', 'css-loader'],
+            }
+        ]
+    }
 
-    // plugins: [
-    //     new HtmlWebpackPlugin({template: './index.html'})
-    // ],//end of plugins
-
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'build'),
-            publicPath: './build/bundle.js',
-        },
-        proxy: {
-            '/api': {
-                target: 'http://localhost:8080', 
-                router: () => 'http://localhost:3000',
-            },
-        }
-    },//end of dev server
-
-    resolve: {
-        extensions: ['.js', '.jsx'],
-    },
 }
