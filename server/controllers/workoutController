@@ -9,7 +9,7 @@ workoutController.getHistory = (req, res, next) => {
             log: 'Middleware error. workoutController getHistory',
             message: { err: 'An err occurred' },
         });
-        console.log('HISTORY', history)
+        console.log('HISTORY')
         res.locals.history = history;
         return next();
     });
