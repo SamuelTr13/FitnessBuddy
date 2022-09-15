@@ -1,11 +1,15 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const { checkServerIdentity } = require('tls');
 const apiRouter = require('./routers/api');
 
 const PORT = 3000;
 
+/**
+ * handle parsing request body
+ */
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //serve files in src for frontend
 app.use('/', express.static(path.resolve(__dirname, '../src')))

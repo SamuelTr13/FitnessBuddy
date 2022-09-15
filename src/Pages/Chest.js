@@ -44,22 +44,25 @@ class Chest extends Component {
     //   .catch(err => console.log('Chest.gethistory: get history: Error: ', err));
   }
 
-  submitForm (event) {
-    const body = {
+  submitForm() {
+    const reps = document.getElementById('reps').value;
+    const weight = document.getElementById('weight').value;
+    const notes = document.getElementById('notes').value;
+    const data = {
       reps,
       weight,
       notes,
     };
-
     fetch('/api/chest', {
       method: 'POST',
       headers: {
-        'Content-Type': 'Application/JSON'
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(data)
     })
-      .then(res => res.json())
-      .then(() => {
+    .then(res => res.json())
+    .then((data) => {
+        console.log('data')
         this.getHistory();
         // newHistory = this.state.historyUpdate;
         // this.setState({ historyUpdate: !newHistory })
@@ -117,14 +120,14 @@ class Chest extends Component {
             <div id='exerciseBox'>
               <h3>Bench Press</h3>
               <h4>Sets: 3 Reps: 8-10</h4>
-              <form onSubmit={this.submitForm} >
-                <input className='repititions' type='text' placeholder='# of Reps' />
-                <input className='weight' type='text' placeholder='Weight' />
+              <div >
+                <input id='reps' type='text' placeholder='# of Reps' />
+                <input id='weight' type='text' placeholder='Weight' />
                 <div>
-                  <input className='notes' type='text' placeholder='Notes' ></input>
+                  <input id='notes' type='text' placeholder='Notes' ></input>
                 </div>
-                <button type='submit' >Submit</button>
-              </form>
+                <input type='submit' value='Submit' onClick={this.submitForm}></input>
+              </div>
               <div>{historyData}</div>
             </div>
             <div id='exerciseBox'>

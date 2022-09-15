@@ -9,7 +9,7 @@ router.get('/chest', workoutController.getHistory, (req, res) => {
 });
 
 router.post('/chest', workoutController.addHistory, (req, res) => {
-    res.status(200)
+    res.status(200).json([{"success": "success"}])
 });
 
 module.exports = router;
