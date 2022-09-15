@@ -131,6 +131,7 @@ class Chest extends Component {
         <header className="pageHeader">
           <h1>Let's Get that Pec Meat</h1>
           <div id='mainContainer'>
+            <div id='workoutsContainer'>
             <div id='exerciseBox'>
               <h3>Bench Press</h3>
               <h4>Sets: 3 Reps: 8-10</h4>
@@ -142,7 +143,6 @@ class Chest extends Component {
                 </div>
                 <input type='submit' value='Submit' onClick={()=> this.submitForm()}></input>
               </div>
-              <div>{historyData}</div>
             </div>
             <div id='exerciseBox'>
               <h3>Incline Bench Press</h3>
@@ -203,7 +203,9 @@ class Chest extends Component {
                 </div>
                 <input type='submit' value='Done Set'></input>
               </form>
+              </div>
             </div>
+              <div id='history'>{historyData}</div>
           </div>
         </header>
       </section>

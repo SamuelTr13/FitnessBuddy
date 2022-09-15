@@ -12,7 +12,24 @@ body {
 
 #mainContainer {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  /* border-style: solid; */
+  border-color: white;
+  justify-content: space-between;
+  padding-left: 50px;
+}
+
+#workoutsContainer {
+  /* border-style: solid; */
+  /* border-color: white; */
+  width: 1000px;
+}
+#history {
+  /* border-style: solid; */
+  border-color: white;
+  width: 1000px;
+  overflow: auto;
+  height: 200px;
 }
 
 /* modal */
