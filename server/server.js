@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { checkServerIdentity } = require('tls');
-const pageRouter = require('./routers/pages');
-const Chest = require('../src/Pages/Chest');
+const apiRouter = require('./routers/api');
 
 const PORT = 3000;
 
@@ -16,7 +15,7 @@ app.get('/', (req, res) => {
 return res.status(200).sendFile(path.join(__dirname, '../src/index.html'));
 });
 
-app.use('/pages', pageRouter) 
+app.use('/api', apiRouter) 
 
 app.use('*', (req, res) => {
     res.status(404).send('This is not the page you\'re looking for');

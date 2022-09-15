@@ -24,9 +24,9 @@ class Chest extends Component {
     this.getHistory = this.getHistory.bind(this);
   }
   
-  // componentDidMount() {
-  //   this.getHistory();
-  // }
+  componentDidMount() {
+    this.getHistory();
+  }
 
   submitForm (event) {
     const body = {
@@ -35,7 +35,7 @@ class Chest extends Component {
       notes,
     };
 
-    fetch('/pages/chest', {
+    fetch('/api/chest', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON'
@@ -44,19 +44,24 @@ class Chest extends Component {
     })
       .then(res => res.json())
       .then(() => {
-        newHistory = this.state.historyUpdate;
-        this.setState({ historyUpdate: !newHistory })
+        this.getHistory();
+        // newHistory = this.state.historyUpdate;
+        // this.setState({ historyUpdate: !newHistory })
       })
       .catch(err => console.log('Chest post history /pages/chest: ERROR: ', err));
   }//end of submitform
 
   //get history of workouts
   getHistory () {
-    fetch('http://localhost:3000/pages/chest')
-      .then(res => res.json())
+    fetch('/api/chest')
+      // .then(res => {
+      //   return res.json()
+      // })
       .then((history) => {
+        console.log('response', history)
+        if (!history.history) history = [];
         return this.setState({
-          history,
+          history: [{'Reps': 4, Weight: 50, Notes: ''},{'Reps': 4, Weight: 50, Notes: ''}],
         });
       })
       .catch(err => console.log('Chest.gethistory: get history: Error: ', err));
@@ -65,13 +70,25 @@ class Chest extends Component {
   //live reloading to see history 
   //when click on submit for each workout then live reload history to the screen 
   render() {
-    this.getHistory();
+    const historyData = [];
     const { history } = this.state;
-
+    for (let i = 0; i < history.length; i++) {
+      const reps = history[i].Reps;
+      const weight = history[i].Weight;
+      const notes = history[i].Notes;
+      historyData.push(
+        <div key = {i}>
+          <h3>Reps: {reps} Weight: {weight}</h3>
+          <h4>Notes: {notes}</h4>
+        </div>
+      )
+      
+    }
+    
     // const [reps, repsOnChange] = useInput('');
     // const [weight, weightOnChange] = useInput('');
     // const [notes, notesOnChange] = useInput('');
-
+    
     return (
       <section className="mainMenu">
         <header className="pageHeader">
@@ -88,7 +105,7 @@ class Chest extends Component {
                 </div>
                 <button type='submit' >Submit</button>
               </form>
-              <div>{history}</div>
+              <div>{historyData}</div>
             </div>
             <div id='exerciseBox'>
               <h3>Incline Bench Press</h3>

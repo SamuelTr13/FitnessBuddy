@@ -4,8 +4,8 @@ import '../styles.css';
 
 export default function Home() {
     return (
-            <div>
-            <h1>Home Page</h1>
+        <div>
+            <h2>Home Page</h2>
             <nav>
                 <ul>
                     <li>
