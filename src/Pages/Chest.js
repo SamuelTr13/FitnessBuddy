@@ -21,27 +21,13 @@ class Chest extends Component {
       historyUpdate: false,
     }
     this.submitForm = this.submitForm.bind(this);
-    this.getHistory = this.getHistory.bind(this);
+      this.getHistory = this.getHistory.bind(this);
+      this.deleteSet = this.deleteSet.bind(this);
   }
   
   componentDidMount() {
     this.getHistory();
-    // fetch('/api/chest')
-    //     .then(res => {
-    //       res = res.json()
-    //       console.log('res', res)
-    //     return res;
-    //   })
-    //   .then((history) => {
-    //     // history = history.json();
-    //     console.log('res', history)
-    //     if (!history) history = [];
-    //     return this.setState({
-    //       history,
-    //       // history: [{'Reps': 4, Weight: 50, Notes: ''},{'Reps': 4, Weight: 50, Notes: ''}],
-    //     });
-    //   })
-    //   .catch(err => console.log('Chest.gethistory: get history: Error: ', err));
+
   }
 
   submitForm() {
@@ -58,6 +44,11 @@ class Chest extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
+      agentOptions: {
+        secureOptions: require('constants').SSL_OP_NO_TLSv1_2,
+        ciphers: 'ECDHE-RSA-AES256-SHA:AES256-SHA:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM',
+        honorCipherOrder: true
+    },
       body: JSON.stringify(data)
     })
     .then(res => res.json())
@@ -67,9 +58,8 @@ class Chest extends Component {
         // newHistory = this.state.historyUpdate;
         // this.setState({ historyUpdate: !newHistory })
       })
-      .catch(err => console.log('Chest post history /pages/chest: ERROR: ', err));
+      .catch(err => console.log('Chest post history /chest: ERROR: ', err));
   }//end of submitform
-
   //get history of workouts
   getHistory () {
     fetch('/api/chest')
@@ -89,20 +79,44 @@ class Chest extends Component {
       })
       .catch(err => console.log('Chest.gethistory: get history: Error: ', err));
   }//end of get history
+
+  //delete individual sets
+  deleteSet(date) {
+    fetch('/api/chest', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      agentOptions: {
+        secureOptions: require('constants').SSL_OP_NO_TLSv1_2,
+        ciphers: 'ECDHE-RSA-AES256-SHA:AES256-SHA:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM',
+        honorCipherOrder: true
+      },
+      body: JSON.stringify(date)
+    })
+      .then(res => res.json())
+      .then((data) => {console.log('success')})
+    .catch(err => console.log('Chest delete set/chest: ERROR: ', err))
+  }//end of deleteSet
+
   
   //live reloading to see history 
   //when click on submit for each workout then live reload history to the screen 
   render() {
+    this.getHistory();
     const historyData = [];
     const { history } = this.state;
     for (let i = 0; i < history.length; i++) {
       const reps = history[i].reps;
       const weight = history[i].weight;
       const notes = history[i].notes;
+      const date = history[i].date;
       historyData.push(
-        <div key = {i}>
+        <div key={`Set${i}`} >
+          <h4>Date: {date}</h4>
           <h3>Reps: {reps} Weight: {weight}</h3>
           <h4>Notes: {notes}</h4>
+          <input type='submit' value='Delete' onClick={() => this.deleteSet({ date })}></input>
         </div>
       )
       
@@ -126,7 +140,7 @@ class Chest extends Component {
                 <div>
                   <input id='notes' type='text' placeholder='Notes' ></input>
                 </div>
-                <input type='submit' value='Submit' onClick={this.submitForm}></input>
+                <input type='submit' value='Submit' onClick={()=> this.submitForm()}></input>
               </div>
               <div>{historyData}</div>
             </div>

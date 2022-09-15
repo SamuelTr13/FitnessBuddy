@@ -15,9 +15,11 @@ mongoose.connect(MONGO_URI, {
 const Schema = mongoose.Schema;
 
 const historySchema = new Schema({
+    date: String,
     reps: Number,
     weight: Number,
-    notes: String,
+  notes: String,
+    
 });
 
 const History = mongoose.model('history', historySchema);

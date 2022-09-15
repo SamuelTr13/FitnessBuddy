@@ -58,7 +58,12 @@ module.exports = {
         headers: { 'Access-Control-Allow-Origin': '*' },
         
         proxy: {
-            '/': {
+            '/api/**': {
+                target: 'http://localhost:3000', 
+                secure: false,
+                changeOrigin: true,
+            },
+            '/chest': {
                 target: 'http://localhost:3000', 
                 secure: false,
                 changeOrigin: true,

@@ -12,4 +12,8 @@ router.post('/chest', workoutController.addHistory, (req, res) => {
     res.status(200).json([{"success": "success"}])
 });
 
+router.delete('/chest', workoutController.deleteSet, (req, res) => {
+    res.status(200).json([{"success": "success"}])
+});
+
 module.exports = router;

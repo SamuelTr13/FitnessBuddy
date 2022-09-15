@@ -18,7 +18,14 @@ workoutController.getHistory = (req, res, next) => {
 
 //this controller adds the input history to the database
 workoutController.addHistory = (req, res, next) => {
+    let currentDate = new Date();
+    let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+    let cDay = currentDate.getDate();
+    let cMonth = currentDate.getMonth() + 1;
+    let cYear = currentDate.getFullYear();
+    const current = cDay + "/" + cMonth + "/" + cYear + ' ' + time;
     models.History.create({
+        date: current,
         reps: req.body.reps,
         weight: req.body.weight,
         notes: req.body.notes,
@@ -30,5 +37,27 @@ workoutController.addHistory = (req, res, next) => {
         return next();
     });
 }//end of addhistory
+
+workoutController.deleteSet = (req, res, next) => {
+    const date = req.body.date;
+    models.History.findOneAndDelete({date}, (err, set) => {
+        if (err) {
+            return next({
+                log: 'Middleware error. workoutController getHistory',
+                status: 403,
+                message: { err: 'An err occurred' },
+            });
+        };
+
+        if (!set) return next ({
+          log: 'Middleware error. workoutcontroller.deleteset',
+          status: 404,
+          message: { err: 'Set not found' },
+        });
+
+        res.locals.set = set;
+        return next();
+    });
+};
 
 module.exports = workoutController;
