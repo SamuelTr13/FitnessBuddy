@@ -4,13 +4,13 @@ const workoutController = {};
 
 //this controller gets all the workout history
 workoutController.getHistory = (req, res, next) => {
-    models.History.find({}, (err, history) => {
+    models.History.find({}, (err, histories) => {
         if (err) return next({
             log: 'Middleware error. workoutController getHistory',
             message: { err: 'An err occurred' },
         });
-        console.log('HISTORY')
-        res.locals.history = history;
+        console.log('HISTORY', histories)
+        res.locals.history = histories;
         return next();
     });
 };

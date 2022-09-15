@@ -57,7 +57,7 @@ module.exports = {
         headers: { 'Access-Control-Allow-Origin': '*' },
         
         proxy: {
-            '/pages/**': {
+            '/api/**': {
                 target: 'http://localhost:3000', 
             },
         }

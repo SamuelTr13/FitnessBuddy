@@ -58,7 +58,7 @@ class Chest extends Component {
       //   return res.json()
       // })
       .then((history) => {
-        console.log('response', history)
+        // console.log('response', history)
         if (!history.history) history = [];
         return this.setState({
           history: [{'Reps': 4, Weight: 50, Notes: ''},{'Reps': 4, Weight: 50, Notes: ''}],

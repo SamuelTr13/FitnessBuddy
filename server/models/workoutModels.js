@@ -20,6 +20,6 @@ const historySchema = new Schema({
     notes: String,
 });
 
-const History = mongoose.model('workoutHistory', historySchema);
+const History = mongoose.model('history', historySchema);
 // mongorestore --uri='mongodb+srv://samtran:1234@cluster0.sxikjog.mongodb.net/?retryWrites=true&w=majority'
 module.exports = { History };
