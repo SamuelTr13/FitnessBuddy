@@ -34,6 +34,9 @@ class Chest extends Component {
     const reps = document.getElementById('reps').value;
     const weight = document.getElementById('weight').value;
     const notes = document.getElementById('notes').value;
+    document.getElementById('notes').value = '';
+    document.getElementById('weight').value = '';
+    document.getElementById('reps').value = '';
     const data = {
       reps,
       weight,

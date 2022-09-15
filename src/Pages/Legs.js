@@ -6,7 +6,7 @@ export default function Home() {
       <section className="mainMenu">
         <header className="pageHeader">
           <h1>All Natural Butt Lift Day!</h1>
-          <div id = 'mainContainer'>
+          <div id = 'main'>
             <div id ='exerciseBox'>
               <h3>Back Squat</h3>
               <h4>Sets: 3 Reps: 10-12</h4>

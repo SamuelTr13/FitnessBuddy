@@ -6,7 +6,7 @@ export default function Home() {
       <section className="mainMenu">
         <header className="pageHeader">
           <h1>Build those Wings to Fly!</h1>
-          <div id = 'mainContainer'>
+          <div id = 'main'>
             <div id ='exerciseBox'>
               <h3>Seated Cable Row</h3>
               <h4>Sets: 4 Reps: 10</h4>
