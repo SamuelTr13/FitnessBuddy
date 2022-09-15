@@ -26,6 +26,22 @@ class Chest extends Component {
   
   componentDidMount() {
     this.getHistory();
+    // fetch('/api/chest')
+    //     .then(res => {
+    //       res = res.json()
+    //       console.log('res', res)
+    //     return res;
+    //   })
+    //   .then((history) => {
+    //     // history = history.json();
+    //     console.log('res', history)
+    //     if (!history) history = [];
+    //     return this.setState({
+    //       history,
+    //       // history: [{'Reps': 4, Weight: 50, Notes: ''},{'Reps': 4, Weight: 50, Notes: ''}],
+    //     });
+    //   })
+    //   .catch(err => console.log('Chest.gethistory: get history: Error: ', err));
   }
 
   submitForm (event) {
@@ -54,14 +70,18 @@ class Chest extends Component {
   //get history of workouts
   getHistory () {
     fetch('/api/chest')
-      // .then(res => {
-      //   return res.json()
-      // })
-      .then((history) => {
-        // console.log('response', history)
-        if (!history.history) history = [];
+        .then(res => {
+          res = res.json()
+          // console.log('res', res)
+        return res;
+      })
+      .then((data) => {
+        // history = history.json();
+        // console.log('res', data)
+        // if (!history) history = [];
         return this.setState({
-          history: [{'Reps': 4, Weight: 50, Notes: ''},{'Reps': 4, Weight: 50, Notes: ''}],
+          history: data,
+          // history: [{'Reps': 4, Weight: 50, Notes: ''},{'Reps': 4, Weight: 50, Notes: ''}],
         });
       })
       .catch(err => console.log('Chest.gethistory: get history: Error: ', err));
@@ -73,9 +93,9 @@ class Chest extends Component {
     const historyData = [];
     const { history } = this.state;
     for (let i = 0; i < history.length; i++) {
-      const reps = history[i].Reps;
-      const weight = history[i].Weight;
-      const notes = history[i].Notes;
+      const reps = history[i].reps;
+      const weight = history[i].weight;
+      const notes = history[i].notes;
       historyData.push(
         <div key = {i}>
           <h3>Reps: {reps} Weight: {weight}</h3>

@@ -8,6 +8,7 @@ module.exports = {
 
     output: {
         path: path.join(__dirname, '/dist'),
+        publicPath: '/',
         filename: 'bundle.js'
     },
 
@@ -52,13 +53,15 @@ module.exports = {
 
         static: {
             directory: path.join(__dirname, 'build'),
-            publicPath: './build/bundle.js',
+            publicPath: '/',
         },
         headers: { 'Access-Control-Allow-Origin': '*' },
         
         proxy: {
             '/api/**': {
                 target: 'http://localhost:3000', 
+                secure: false,
+                changeOrigin: true,
             },
         }
     },
