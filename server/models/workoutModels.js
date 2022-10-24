@@ -24,4 +24,4 @@ const historySchema = new Schema({
 
 const History = mongoose.model('history', historySchema);
 // mongorestore --uri='mongodb+srv://samtran:1234@cluster0.sxikjog.mongodb.net/?retryWrites=true&w=majority'
-module.exports = { History };
+module.exports = { History, MONGO_URI};

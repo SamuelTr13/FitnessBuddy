@@ -41,4 +41,9 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, console.log(`Listening on port ${PORT}`)); //listens on port 3000 -> http://localhost:3000/
+// if (Node.ENV !== 'test') {
+  // app.listen(PORT, console.log(`Listening on port ${PORT}`)); //listens on port 3000 -> http://localhost:3000/
+// }
+
+module.exports = app;
+
